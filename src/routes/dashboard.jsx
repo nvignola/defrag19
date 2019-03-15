@@ -14,25 +14,31 @@ const dashboardRoutes = [
     component: Dashboard
   },
   {
-    path: "/user",
-    name: "User Profile",
+    path: "/clients",
+    name: "Clients",
     icon: "pe-7s-user",
-    component: UserProfile
+    component: Icons
   },
   {
-    path: "/table",
-    name: "Table List",
-    icon: "pe-7s-note2",
-    component: TableList
-  },
-  {
-    path: "/typography",
-    name: "Typography",
+    path: "/glossary",
+    name: "Glossary",
     icon: "pe-7s-news-paper",
     component: Typography
   },
-  { path: "/icons", name: "Icons", icon: "pe-7s-science", component: Icons },
-  { path: "/maps", name: "Maps", icon: "pe-7s-map-marker", component: Maps },
+  // {
+  //   path: "/user",
+  //   name: "User Profile",
+  //   icon: "pe-7s-user",
+  //   component: UserProfile
+  // },
+  // {
+  //   path: "/table",
+  //   name: "Table List",
+  //   icon: "pe-7s-note2",
+  //   component: TableList
+  // },
+  // { path: "/icons", name: "Icons", icon: "pe-7s-science", component: Icons },
+  // { path: "/maps", name: "Maps", icon: "pe-7s-map-marker", component: Maps },
   {
     path: "/notifications",
     name: "Notifications",
