@@ -26,18 +26,18 @@ const dashboardRoutes = [
     icon: "pe-7s-news-paper",
     component: Typography
   },
-  // {
-  //   path: "/user",
-  //   name: "User Profile",
-  //   icon: "pe-7s-user",
-  //   component: UserProfile
-  // },
-  // {
-  //   path: "/table",
-  //   name: "Table List",
-  //   icon: "pe-7s-note2",
-  //   component: TableList
-  // },
+  {
+    path: "/clientDetails",
+    name: "Client Details",
+    icon: "pe-7s-user",
+    component: UserProfile
+  },
+  {
+    path: "/table",
+    name: "Table List",
+    icon: "pe-7s-note2",
+    component: TableList
+  },
   // { path: "/icons", name: "Icons", icon: "pe-7s-science", component: Icons },
   // { path: "/maps", name: "Maps", icon: "pe-7s-map-marker", component: Maps },
   {
