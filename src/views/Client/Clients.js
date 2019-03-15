@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Grid, Row, Col } from "react-bootstrap";
 
 import Card from "components/Card/Card";
-import { iconsArray } from "variables/Variables.jsx";
+import clients from "variables/clients";
 
 class Clients extends Component {
   render() {
@@ -19,7 +19,7 @@ class Clients extends Component {
                 }
                 content={
                   <Row>
-                    {iconsArray.map((prop, key) => {
+                    {clients.map((client, key) => {
                       return (
                         <Col
                           lg={2}
@@ -30,8 +30,7 @@ class Clients extends Component {
                           key={key}
                         >
                           <div className="font-icon-detail">
-                            <i className={prop} />
-                            <input type="text" defaultValue={prop} />
+                            {client.name}
                           </div>
                         </Col>
                       );
