@@ -3,6 +3,7 @@ import UserProfile from "views/UserProfile/UserProfile";
 import TableList from "views/TableList/TableList";
 import Typography from "views/Typography/Typography";
 import Clients from "views/Client/Clients";
+import Documents from "views/Client/Documents";
 
 const dashboardRoutes = [
   {
@@ -33,7 +34,7 @@ const dashboardRoutes = [
     path: "/documents",
     name: "Documents",
     icon: "pe-7s-user",
-    component: TableList
+    component: Documents
   },
   {
     path: "/documentDetails",
