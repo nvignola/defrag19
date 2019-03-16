@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Row, Col } from "react-bootstrap";
 import ChartistGraph from 'react-chartist';
+import { Link } from "react-router-dom";
 
 import Card from "components/Card/Card.jsx";
 import predictions from "variables/predictions";
@@ -10,6 +11,21 @@ class Predictions extends Component {
         return (
             <div className="content prediction-view">
                 <Grid fluid>
+                    <Row>
+                        <Col md={12}>
+                        <p>
+                        <Link to={'/clients'}>Clients</Link>
+                        <span className="breadcrumb-separator">&gt;</span>
+                        <Link to={`/clients/${this.props.client.id}`}>
+                            {this.props.client.name}
+                            <span className="text-muted">(#{this.props.client.id})</span>
+                        </Link>
+                        <span className="breadcrumb-separator">&gt;</span>
+                        <strong>Prediction</strong>
+                        </p>
+                        <hr />
+                        </Col>
+                    </Row>
                     <Row>
                         <Col md={6}>
                             <Card

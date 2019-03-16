@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 
 import Card from "components/Card/Card.jsx";
-import { thArray, tdArray } from "variables/Variables.jsx";
+import { Link } from 'react-router-dom';
 
 import statement from "variables/statement";
 
@@ -23,6 +23,21 @@ class Statement extends Component {
         return (
             <div className="content statement-view">
                 <Grid fluid>
+                    <Row>
+                        <Col md={12}>
+                        <p>
+                        <Link to={'/clients'}>Clients</Link>
+                        <span className="breadcrumb-separator">&gt;</span>
+                        <Link to={`/clients/${this.props.client.id}`}>
+                            {this.props.client.name}
+                            <span className="text-muted">(#{this.props.client.id})</span>
+                        </Link>
+                        <span className="breadcrumb-separator">&gt;</span>
+                        <strong>Statement</strong>
+                        </p>
+                        <hr />
+                        </Col>
+                    </Row>
                     <Row>
                         <Col md={12}>
                             <Card
