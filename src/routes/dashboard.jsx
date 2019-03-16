@@ -2,6 +2,7 @@ import Dashboard from "views/Dashboard/Dashboard";
 import UserProfile from "views/UserProfile/UserProfile";
 import TableList from "views/TableList/TableList";
 import Statement from "views/Statement/Statement";
+import Prediction from "views/Prediction/Prediction";
 import Typography from "views/Typography/Typography";
 import Clients from "views/Client/Clients";
 import Documents from "views/Client/Documents";
@@ -53,8 +54,8 @@ const dashboardRoutes = [
   {
     path: "/prediction",
     name: "Prediction",
-    icon: "pe-7s-note2",
-    component: TableList // graphs
+    icon: "pe-7s-graph2",
+    component: Prediction // graphs
   },
   { redirect: true, path: "/", to: "/dashboard", name: "Dashboard" }
 ];
