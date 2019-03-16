@@ -6,6 +6,13 @@ import { Link } from "react-router-dom";
 import Card from "components/Card/Card.jsx";
 import predictions from "variables/predictions";
 
+const ChartLegend = predictions.legend.map((prop, key) => {
+    return <h5 key={key}>
+        <span className="legend-color" style={{ backgroundColor: `${prop.color}` }}></span>
+        <span className="legend-label">{prop.label}</span>
+    </h5>
+});
+
 class Predictions extends Component {
     render() {
         return (
@@ -34,14 +41,24 @@ class Predictions extends Component {
                                 content={
                                     <ChartistGraph data={predictions.data} options={Object.assign({}, predictions.options, { stackBars: true })} type="Bar" />
                                 }
+                                legend={
+                                    <div className="legend-container">
+                                        { ChartLegend }
+                                    </div>
+                                }
                             />
                         </Col>
-                        <Col md={6}>
+                        <Col md={12}>
                             <Card
                                 title="Prediction #2"
                                 category="Prediction"
                                 content={
                                     <ChartistGraph data={predictions.data} options={predictions.options} type="Bar" />
+                                }
+                                legend={
+                                    <div className="legend-container">
+                                        { ChartLegend }
+                                    </div>
                                 }
                             />
                         </Col>
@@ -53,6 +70,11 @@ class Predictions extends Component {
                                 category="Prediction"
                                 content={
                                     <ChartistGraph data={predictions.data} options={predictions.options} type="Line" className="prediction-lines-animation" />
+                                }
+                                legend={
+                                    <div className="legend-container">
+                                        { ChartLegend }
+                                    </div>
                                 }
                             />
                         </Col>
