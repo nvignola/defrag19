@@ -257,6 +257,13 @@ const tdArray = [
   ["6", "Mason Porter", "$78,615", "Chile", "Gloucester"]
 ];
 
+const documentsTHArray = ["ID", "Name", "Upload Date", "Actions"];
+const documentsTDArray = [
+  [ "2190", "Jahrabschluss per 31.12.2015", "15.03.2019" ],
+  [ "2010", "Jahrabschluss per 31.12.2014", "15.03.2018" ],
+  [ "1934", "Jahrabschluss per 31.12.2013", "20.02.2017" ]
+];
+
 //
 // //
 // // // For icons
@@ -593,5 +600,7 @@ module.exports = {
   dataBar,
   optionsBar,
   responsiveBar,
-  legendBar // For charts (Dashboard view)
+  legendBar, // For charts (Dashboard view)
+  documentsTHArray,
+  documentsTDArray
 };

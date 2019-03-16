@@ -5,7 +5,7 @@ import HeaderLinks from "../Header/HeaderLinks.jsx";
 import { name, url } from "variables/config";
 
 import imagine from "assets/img/sidebar-3.jpg";
-import logo from "assets/img/reactlogo.png";
+import logo from "assets/img/dino.svg";
 import gif from "assets/img/super_dino.gif";
 
 import dashboardRoutes from "routes/dashboard.jsx";
@@ -93,7 +93,7 @@ class Sidebar extends Component {
             bottom: 0,
             zIndex: '1000'
           }} className="dino-gif-container">
-          <img src={gif} style={{
+          <img src={gif} alt="..." style={{
             width: '100%'
           }}/>
         </div>
