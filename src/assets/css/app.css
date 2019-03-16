@@ -89,10 +89,27 @@
   font-size: 1.8rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  display: block;  
+  display: block;
   text-align: center;
 }
 
 .breadcrumb-separator {
   margin: 0 1rem;
+}
+
+.prediction-view .legend-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.prediction-view .legend-color {
+  border-radius: 50%;
+  display: inline-block;
+  height: 15px;
+  margin-right: 5px;
+  width: 15px;
+}
+
+.prediction-view .card .footer div {
+  display: flex;
 }
