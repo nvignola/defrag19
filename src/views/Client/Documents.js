@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 
 import Card from "components/Card/Card.jsx";
 import { documentsTHArray, documentsTDArray } from "variables/Variables.jsx";
+import Document from './Document';
+
 class Documents extends Component {
   render() {
     return (
@@ -48,7 +50,7 @@ class Documents extends Component {
                               return <td key={key}>{prop}</td>;
                             })}
                             <td key={'view'}>
-                              <a className="btn btn-primary btn-sm" href={'#/documentDetails'}>View Details</a>
+                              <Link className="btn btn-primary btn-sm" to={`${this.props.match.url}/${key}`}>View Details</Link>
                               &nbsp;
                               <span className="btn btn-danger btn-sm">Delete</span>
                             </td>
@@ -62,6 +64,12 @@ class Documents extends Component {
             </Col>
           </Row>
         </Grid>
+        {
+          documentsTDArray.map((prop, key) => <Route
+            key={key}
+            path={`${this.props.match.url}/${key}`}
+            render={(props) => <Document document={prop} {...props} />} />)
+        }
       </div>
     );
   }

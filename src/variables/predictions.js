@@ -49,7 +49,7 @@ export default {
     },
     smallData: {
         labels: ['2016', '2017', '2018'],
-        series: [year1].concat([year2]).concat([year3]),
+        series,
     },
     options: {
         axisY: {

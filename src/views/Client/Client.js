@@ -76,18 +76,18 @@ class Client extends Component {
             </Row>
           </Grid>
         : <Fragment>
-          {this.props.location.pathname === `${this.props.match.url}/documents` ? <Route 
-            to={`${this.props.match.url}/documents`} exact={false}
-            render={() => <Documents client={this.props.client} />} 
-          /> : null}
-          {this.props.location.pathname === `${this.props.match.url}/prediction` ? <Route
-            to={`${this.props.match.url}/prediction`} exact={false}
-            render={() => <Prediction client={this.props.client} />}
-          /> : null}
-          {this.props.location.pathname === `${this.props.match.url}/statement` ? <Route
-            to={`${this.props.match.url}/statement`} exact={false}
-            render={() => <Statement client={this.props.client} />}
-          /> : null}
+          <Route 
+            path={`${this.props.match.url}/documents`} exact={false}
+            render={(props) => <Documents client={this.props.client}  {...props} />} 
+          />
+          <Route
+            path={`${this.props.match.url}/prediction`} exact={false}
+            render={(props) => <Prediction client={this.props.client}  {...props} />}
+          />
+          <Route
+            path={`${this.props.match.url}/statement`} exact={false}
+            render={(props) => <Statement client={this.props.client}  {...props} />}
+          />
         </Fragment>
         }
       </Fragment>

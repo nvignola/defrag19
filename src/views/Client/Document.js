@@ -6,21 +6,22 @@ import Card from "components/Card/Card.jsx";
 
 class Document extends Component {
   render() {
+    console.log(this.props);
     return (
-      <Row className="content">
+      <div className="content">
         <Grid fluid>
           <Row>
             <Col md={12}>
               <Card
-                title="Document Details"
+                title={`Document Details: #${this.props.document[0]}`}
                 category="Document Details with the OCR analysis and Information Extraction"
                 ctTableFullWidth
                 ctTableResponsive
                 content={
                   <div>
                     <div className="content">
-                      <p><strong>Document Name:</strong> Jahrabschluss per 31.12.12015</p>
-                      <p><strong>Upload Date:</strong> 15.03.2019</p>
+                      <p><strong>Document Name:</strong> {this.props.document[1]}</p>
+                      <p><strong>Upload Date:</strong> {this.props.document[2]}</p>
                     </div>
                     <Row className="content">
                       <Col md={4}>
@@ -42,7 +43,7 @@ class Document extends Component {
             </Col>
           </Row>
         </Grid>
-      </Row>
+      </div>
     );
   }
 }
