@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import HeaderLinks from "../Header/HeaderLinks.jsx";
 import { name, url } from "variables/config";
 
-import imagine from "assets/img/sidebar-3.jpg";
+import imagine from "assets/img/bg.jpg";
 import logo from "assets/img/dino.svg";
 import gif from "assets/img/super_dino.gif";
 

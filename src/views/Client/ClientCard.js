@@ -29,7 +29,7 @@ export class ClientCard extends Component {
           </div>
           <div className="card-footer text-center">
             <Link to={`${this.props.url}/documents`} className="btn btn-primary btn-sm">Documents</Link>&nbsp;
-            <Link to={`${this.props.url}/statement`} className="btn btn-info btn-sm">Statements</Link>&nbsp;
+            <Link to={`${this.props.url}/statement`} className="btn btn-primary btn-sm">Statements</Link>&nbsp;
             <Link to={`${this.props.url}/prediction`} className="btn btn-warning btn-sm">Predictions</Link>
           </div>
         </div>
