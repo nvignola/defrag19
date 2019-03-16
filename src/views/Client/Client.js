@@ -68,7 +68,7 @@ class Client extends Component {
                   }
                   legend={
                     <div className="legend-container">
-                      { ChartLegend(this.state._predictions.legend) }
+                      { ChartLegend([]) }
                     </div>
                   }
                 />

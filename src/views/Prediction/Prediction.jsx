@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import { Grid, Row, Col } from "react-bootstrap";
 import ChartistGraph from 'react-chartist';
 import { Link } from "react-router-dom";
+import { apiUrl } from 'variables/config';
+import fetch from 'util/fetch';
 
 import Card from "components/Card/Card.jsx";
 import transformDataForGraph from "variables/predictions";
+
+const API_URL = `${apiUrl}/statements`;
 
 const ChartLegend = (legend) => legend.map((prop, key) => {
     return <h5 key={key}>
@@ -23,21 +27,11 @@ class Predictions extends Component {
                 options: {},
                 legend: [],
             },
-            _apiUrl: 'https://i2m3v9oljk.execute-api.eu-west-1.amazonaws.com/production/statements',
         };
     }
 
     componentDidMount() {
-        fetch(this.state._apiUrl, {
-            mode: "cors",
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-            },
-        })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(({ data }) => this.setState({
+        fetch(API_URL).then(({ data }) => this.setState({
             _predictions: transformDataForGraph(data),
         }));
     }
