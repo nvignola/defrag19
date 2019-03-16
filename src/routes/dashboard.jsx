@@ -2,10 +2,7 @@ import Dashboard from "views/Dashboard/Dashboard";
 import UserProfile from "views/UserProfile/UserProfile";
 import TableList from "views/TableList/TableList";
 import Typography from "views/Typography/Typography";
-import Icons from "views/Icons/Icons";
 import Clients from "views/Client/Clients";
-import Maps from "views/Maps/Maps";
-import Notifications from "views/Notifications/Notifications";
 
 const dashboardRoutes = [
   {
@@ -33,18 +30,28 @@ const dashboardRoutes = [
     component: UserProfile
   },
   {
-    path: "/table",
-    name: "Table List",
+    path: "/documents",
+    name: "Documents",
+    icon: "pe-7s-user",
+    component: TableList
+  },
+  {
+    path: "/documentDetails",
+    name: "Document Details",
+    icon: "pe-7s-user",
+    component: UserProfile
+  },
+  {
+    path: "/statement",
+    name: "Statement",
     icon: "pe-7s-note2",
     component: TableList
   },
-  // { path: "/icons", name: "Icons", icon: "pe-7s-science", component: Icons },
-  // { path: "/maps", name: "Maps", icon: "pe-7s-map-marker", component: Maps },
   {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "pe-7s-bell",
-    component: Notifications
+    path: "/prediction",
+    name: "Prediction",
+    icon: "pe-7s-note2",
+    component: TableList // graphs
   },
   { redirect: true, path: "/", to: "/dashboard", name: "Dashboard" }
 ];
