@@ -1,40 +1,50 @@
 import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
+import DocImage from "assets/img/doc.png";
 
 import Card from "components/Card/Card.jsx";
 import { thArray, tdArray } from "variables/Variables.jsx";
-class Documents extends Component {
+class Document extends Component {
   render() {
     return (
-      <div className="content">
+      <Row className="content">
         <Grid fluid>
           <Row>
             <Col md={12}>
               <Card
-                title="Striped Table with Hover"
-                category="Here is a subtitle for this table"
+                title="Document Details"
+                category="Document Details with the OCR analysis and Information Extraction"
                 ctTableFullWidth
                 ctTableResponsive
                 content={
                   <div>
-                    <Card>
-                      <img />
-                    </Card>
-                    <Card>
-                      <img />
-                    </Card>
-                    <Card>
-                      <img />
-                    </Card>
+                    <div className="content">
+                      <p><strong>Document Name:</strong> Jahrabschluss per 31.12.12015</p>
+                      <p><strong>Upload Date:</strong> 15.03.2019</p>
+                    </div>
+                    <Row className="content">
+                      <Col md={4}>
+                        <img style={{maxWidth: '100%'}} src={DocImage} alt="Document Received" />
+                        <center>Document Received</center>
+                      </Col>
+                      <Col md={4}>
+                        <img style={{maxWidth: '100%'}} src={DocImage} alt="Document Highlighted" />
+                        <center>Document Highlighted</center>
+                      </Col>
+                      <Col md={4}>
+                        <img style={{maxWidth: '100%'}} src={DocImage} alt="Document Processed" />
+                        <center>Document Processed</center>
+                      </Col>
+                    </Row>
                   </div>
                 }
               />
             </Col>
           </Row>
         </Grid>
-      </div>
+      </Row>
     );
   }
 }
 
-export default Documents;
+export default Document;

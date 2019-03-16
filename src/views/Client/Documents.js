@@ -11,8 +11,8 @@ class Documents extends Component {
           <Row>
             <Col md={12}>
               <Card
-                title="Striped Table with Hover"
-                category="Here is a subtitle for this table"
+                title="Documents"
+                category="All the Documents uploaded for this Client"
                 ctTableFullWidth
                 ctTableResponsive
                 content={

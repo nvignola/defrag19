@@ -4,6 +4,7 @@ import TableList from "views/TableList/TableList";
 import Typography from "views/Typography/Typography";
 import Clients from "views/Client/Clients";
 import Documents from "views/Client/Documents";
+import Document from "views/Client/Document";
 
 const dashboardRoutes = [
   {
@@ -40,7 +41,7 @@ const dashboardRoutes = [
     path: "/documentDetails",
     name: "Document Details",
     icon: "pe-7s-user",
-    component: UserProfile
+    component: Document
   },
   {
     path: "/statement",

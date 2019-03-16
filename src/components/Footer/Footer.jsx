@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "react-bootstrap";
+import {name, url} from 'variables/config'
 
 class Footer extends Component {
   render() {
@@ -9,23 +10,19 @@ class Footer extends Component {
           <nav className="pull-left">
             <ul>
               <li>
-                <a href="#pablo">Home</a>
+                <a href="#home">Home</a>
               </li>
               <li>
-                <a href="#pablo">Company</a>
+                <a href="#company">Company</a>
               </li>
               <li>
-                <a href="#pablo">Portfolio</a>
-              </li>
-              <li>
-                <a href="#pablo">Blog</a>
+                <a href="#blog">Blog</a>
               </li>
             </ul>
           </nav>
           <p className="copyright pull-right">
             &copy; {new Date().getFullYear()}{" "}
-            <a href="http://www.creative-tim.com">Creative Tim</a>, made with
-            love for a better web
+            <a href={url}>{name}</a>
           </p>
         </Grid>
       </footer>

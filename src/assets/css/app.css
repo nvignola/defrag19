@@ -1,0 +1,12 @@
+.dino-gif-container {
+  
+}
+.dino-gif-container:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  z-index: 100000;
+  background: linear-gradient(#000, transparent);
+  width: 100%;
+  height: 40px;
+}
