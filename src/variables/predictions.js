@@ -36,7 +36,7 @@ Object.keys(statement.data).forEach((k, index) => {
     year3.push(statement.data[k].value3);
     year4.push(statement.data[k].value4);
 });
-console.log('>>', legend);
+
 let series = [year1]
     .concat([year2])
     .concat([year3])
@@ -46,6 +46,10 @@ export default {
     data: {
         labels: ['2016', '2017', '2018', '2019'],
         series,
+    },
+    smallData: {
+        labels: ['2016', '2017', '2018'],
+        series: [year1].concat([year2]).concat([year3]),
     },
     options: {
         axisY: {

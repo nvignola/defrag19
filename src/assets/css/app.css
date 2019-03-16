@@ -113,3 +113,23 @@
 .prediction-view .card .footer div {
   display: flex;
 }
+
+.prediction-view-small .footer {
+  margin: 10px -15px -10px;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  overflow: hidden;
+}
+.prediction-view-small .footer .legend-container{
+  display: flex;
+  justify-content: space-between;
+}
+.prediction-view-small .footer .legend-container h5{
+  margin: 0;
+  display: block;
+  padding: 1rem;
+  color: #fff;
+  font-size: 12px;
+  width: 25%;
+}

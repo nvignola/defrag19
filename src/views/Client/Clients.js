@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col, Table } from "react-bootstrap";
 import { Route, Link } from "react-router-dom";
 import Client from "views/Client/Client";
 
@@ -17,6 +17,12 @@ const routes = clients.map(c => ({
 
 
 class Clients extends Component {
+  state = { view: 'table' }
+  toggleView() {
+    this.setState({
+      view: this.state.view === 'grid' ? 'table' : 'grid',
+    })
+  }
   render() {
     const PROPS = this.props;
     return (
@@ -26,7 +32,13 @@ class Clients extends Component {
         ? <Grid fluid>
           <Row>
             <Col md={12}>
-              <Card
+              <button className="btn btn-default btn-sm pull-right" onClick={this.toggleView.bind(this)}>Change View</button>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              {this.state.view === 'grid' 
+              ? <Card
                 title="Clients"
                 ctAllIcons
                 category={
@@ -53,6 +65,36 @@ class Clients extends Component {
                   </Row>
                 }
               />
+              : null }
+
+              {this.state.view === 'table' 
+              ? <Table striped hover>
+                <thead>
+                  <tr>
+                    <th>Client</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {clients.map((client, key) => {
+                    return (
+                      <tr key={key}>
+                        <td>
+                          <div className="link-to-brand" style={client.css}>
+                            <Link to={`/clients/${client.id}`}>{client.name}</Link>
+                          </div>
+                        </td>
+                        <td>
+                          <Link to={`${this.props.match.url}/${client.id}/documents`} className="btn btn-primary">Documents</Link>&nbsp;
+                          <Link to={`${this.props.match.url}/${client.id}/statement`} className="btn btn-primary">Statements</Link>&nbsp;
+                          <Link to={`${this.props.match.url}/${client.id}/prediction`} className="btn btn-warning">Predictions</Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+              : null}
             </Col>
           </Row>
         </Grid>

@@ -6,18 +6,20 @@ import {
 } from "react-bootstrap";
 import { Card } from "components/Card/Card.jsx";
 import ChartistGraph from "react-chartist";
-import {
-  dataBar,
-  optionsBar,
-  responsiveBar,
-  legendBar
-} from "variables/Variables.jsx";
+import predictions from "variables/predictions";
+
 
 import { Route, Link } from "react-router-dom";
 import ClientCard from './ClientCard';
 import Documents from './Documents';
 import Prediction from 'views/Prediction/Prediction';
 import Statement from "views/Statement/Statement";
+
+const ChartLegend = predictions.legend.map((prop, key) => {
+    return <h5 key={key} style={{ backgroundColor: `${prop.color}` }}>
+        <span className="legend-label">{prop.label}</span>
+    </h5>
+});
 
 class Client extends Component {
   createLegend(json) {
@@ -51,34 +53,25 @@ class Client extends Component {
               </Col>
             </Row>
             <Row>
-              <Col md={4}>
+              <Col md={5}>
                 <ClientCard
                   client={this.props.client}
                   url={this.props.match.url}
                   bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
                 />
               </Col>
-              <Col md={8}>
+              <Col md={7} className="prediction-view-small">
                 <Card
-                    id="chartActivity"
-                    title="2014 Sales"
-                    category="All products including Taxes"
-                    stats="Data information certified"
-                    statsIcon="fa fa-check"
-                    content={
-                      <div>
-                        <ChartistGraph
-                          data={dataBar}
-                          type="Bar"
-                          options={optionsBar}
-                          responsiveOptions={responsiveBar}
-                        />
-                      </div>
-                    }
-                    legend={
-                      <div className="legend">{this.createLegend(legendBar)}</div>
-                    }
-                  />
+                  title="Finance Ananlysis"
+                  content={
+                    <ChartistGraph data={predictions.smallData} options={Object.assign({}, predictions.options, { stackBars: true })} type="Bar" />
+                  }
+                  legend={
+                    <div className="legend-container">
+                      { ChartLegend }
+                    </div>
+                  }
+                />
               </Col>
             </Row>
           </Grid>
