@@ -13,6 +13,7 @@ import {
   legendBar
 } from "variables/Variables.jsx";
 
+import { Route, Link } from "react-router-dom";
 import ClientCard from './ClientCard';
 
 class Client extends Component {
@@ -28,8 +29,14 @@ class Client extends Component {
   }
   render() {
     return (
-      <div className="content">
+      <div>
         <Grid fluid>
+          <Row>
+            <Col md={12}>
+            <p><Link to={'/clients'}>Clients</Link> > <strong>{this.props.client.name} <span className="text-muted">(#{this.props.client.id})</span></strong></p>
+            <hr />
+            </Col>
+          </Row>
           <Row>
             <Col md={4}>
               <ClientCard
@@ -60,7 +67,7 @@ class Client extends Component {
                 />
             </Col>
           </Row>
-        </Grid>>
+        </Grid>
       </div>
     );
   }

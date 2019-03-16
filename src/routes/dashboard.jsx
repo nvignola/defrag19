@@ -19,7 +19,7 @@ const dashboardRoutes = [
     path: "/clients",
     name: "Clients",
     icon: "pe-7s-user",
-    component: Clients
+    component: Clients,
   },
   {
     path: "/glossary",

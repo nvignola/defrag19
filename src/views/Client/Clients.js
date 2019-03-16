@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Row, Col } from "react-bootstrap";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import Client from "views/Client/Client";
 
 import Card from "components/Card/Card";
@@ -18,9 +18,13 @@ const routes = clients.map(c => ({
 
 class Clients extends Component {
   render() {
+    console.log(this)
+    const PROPS = this.props;
     return (
       <div className="content">
-        <Grid fluid>
+      {
+      PROPS.location.pathname === PROPS.match.path
+        ? <Grid fluid>
           <Row>
             <Col md={12}>
               <Card
@@ -41,7 +45,7 @@ class Clients extends Component {
                           className="font-icon-list"
                           key={key}
                         >
-                          <div className="font-icon-detail">
+                          <div className="link-to-brand" style={client.css}>
                             <Link to={`/clients/${client.id}`}>{client.name}</Link>
                           </div>
                         </Col>
@@ -53,6 +57,7 @@ class Clients extends Component {
             </Col>
           </Row>
         </Grid>
+        : <div>
         {routes.map((prop, key) => <Route
             path={prop.path}
             key={key}
@@ -64,6 +69,8 @@ class Clients extends Component {
             )}
           />
         )}
+        </div>
+      }
       </div>
     );
   }
