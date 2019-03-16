@@ -8,7 +8,7 @@ import predictions from "variables/predictions";
 class Predictions extends Component {
     render() {
         return (
-            <div className="content">
+            <div className="content prediction-view">
                 <Grid fluid>
                     <Row>
                         <Col md={6}>
@@ -33,10 +33,10 @@ class Predictions extends Component {
                     <Row>
                         <Col md={12}>
                             <Card
-                                title="Prediction #2"
+                                title="Prediction #3"
                                 category="Prediction"
                                 content={
-                                    <ChartistGraph data={predictions.data} options={predictions.options} type="Line" />
+                                    <ChartistGraph data={predictions.data} options={predictions.options} type="Line" className="prediction-lines-animation" />
                                 }
                             />
                         </Col>
