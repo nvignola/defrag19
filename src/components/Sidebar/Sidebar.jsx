@@ -87,7 +87,7 @@ class Sidebar extends Component {
           </ul>
 
         </div>
-        <div style={{
+        {/* <div style={{
             width: '100%',
             position: 'absolute',
             bottom: 0,
@@ -96,7 +96,7 @@ class Sidebar extends Component {
           <img src={gif} alt="..." style={{
             width: '100%'
           }}/>
-        </div>
+        </div> */}
       </div>
     );
   }
