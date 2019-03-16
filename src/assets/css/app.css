@@ -1,5 +1,5 @@
 .dino-gif-container {
-  
+
 }
 .dino-gif-container:before {
   content: '';
@@ -9,4 +9,20 @@
   background: linear-gradient(#000, transparent);
   width: 100%;
   height: 40px;
+}
+
+.statement-view tbody td:last-child,
+.statement-view thead th:last-child {
+  border-left: 2px solid coral;
+  border-right: 2px solid coral;
+}
+
+.statement-view tbody tr:last-child td:last-child {
+  border-bottom: 2px solid coral;
+}
+
+.statement-view thead th:last-child {
+  border-top: 2px solid coral !important;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
