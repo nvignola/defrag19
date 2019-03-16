@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class ClientCard extends Component {
   render() {
@@ -10,9 +11,9 @@ export class ClientCard extends Component {
         <div className="card-body">
           <div className="content">
             <div className="author brand">
-              <a href="#/clients/1" className="avatar border-gray avatar-brand" style={this.props.client.css}>
+              <div className="avatar border-gray avatar-brand" style={this.props.client.css}>
                 <h4>{this.props.client.name}</h4>
-              </a>
+              </div>
             </div>
             <p className="description text-center"><strong>HQ:</strong> {this.props.client.address}</p>
             <hr />
@@ -27,8 +28,9 @@ export class ClientCard extends Component {
             </div>
           </div>
           <div className="card-footer text-center">
-            <a className="btn btn-primary btn-sm" href="#/documents">Documents</a>&nbsp;
-            <a className="btn btn-info btn-sm" href="#/predictions">Predictions</a>
+            <Link to={`${this.props.url}/documents`} className="btn btn-primary btn-sm">Documents</Link>&nbsp;
+            <Link to={`${this.props.url}/statement`} className="btn btn-info btn-sm">Statements</Link>&nbsp;
+            <Link to={`${this.props.url}/prediction`} className="btn btn-warning btn-sm">Predictions</Link>
           </div>
         </div>
       </div>

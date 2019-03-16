@@ -92,3 +92,7 @@
   display: block;  
   text-align: center;
 }
+
+.breadcrumb-separator {
+  margin: 0 1rem;
+}

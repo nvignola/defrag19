@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 
 import Card from "components/Card/Card.jsx";
@@ -8,6 +9,21 @@ class Documents extends Component {
     return (
       <div className="content">
         <Grid fluid>
+          <Row>
+            <Col md={12}>
+            <p>
+              <Link to={'/clients'}>Clients</Link>
+              <span className="breadcrumb-separator">&gt;</span>
+              <Link to={`/clients/${this.props.client.id}`}>
+                {this.props.client.name}
+                <span className="text-muted">(#{this.props.client.id})</span>
+              </Link>
+              <span className="breadcrumb-separator">&gt;</span>
+              <strong>Documents</strong>
+            </p>
+            <hr />
+            </Col>
+          </Row>
           <Row>
             <Col md={12}>
               <Card

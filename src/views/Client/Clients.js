@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Grid, Row, Col } from "react-bootstrap";
 import { Route, Link } from "react-router-dom";
 import Client from "views/Client/Client";
@@ -18,7 +18,6 @@ const routes = clients.map(c => ({
 
 class Clients extends Component {
   render() {
-    console.log(this)
     const PROPS = this.props;
     return (
       <div className="content">
@@ -57,7 +56,7 @@ class Clients extends Component {
             </Col>
           </Row>
         </Grid>
-        : <div>
+        : <Fragment>
         {routes.map((prop, key) => <Route
             path={prop.path}
             key={key}
@@ -69,7 +68,7 @@ class Clients extends Component {
             )}
           />
         )}
-        </div>
+        </Fragment>
       }
       </div>
     );
