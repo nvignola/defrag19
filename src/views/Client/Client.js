@@ -6,22 +6,36 @@ import {
 } from "react-bootstrap";
 import { Card } from "components/Card/Card.jsx";
 import ChartistGraph from "react-chartist";
-import predictions from "variables/predictions";
-
-
+import transformDataForGraph from "variables/predictions";
 import { Route, Link } from "react-router-dom";
+import fetch from 'util/fetch';
+
 import ClientCard from './ClientCard';
 import Documents from './Documents';
-import Prediction from 'views/Prediction/Prediction';
+import Prediction, { API_URL } from 'views/Prediction/Prediction';
 import Statement from "views/Statement/Statement";
 
+
 const ChartLegend = (legend) => legend.map((prop, key) => {
-    return <h5 key={key} style={{ backgroundColor: `${prop.color}` }}>
-        <span className="legend-label">{prop.label}</span>
-    </h5>
+  return <h5 key={key} style={{ backgroundColor: `${prop.color}` }}>
+    <span className="legend-label">{prop.label}</span>
+  </h5>
 });
 
 class Client extends Component {
+  state = {
+    _predictions: {
+      data: {},
+      options: {},
+      legend: [],
+    },
+  };
+
+  componentDidMount() {
+    fetch(API_URL).then(({ data }) => this.setState({
+      _predictions: transformDataForGraph(data),
+    }));
+  }
   createLegend(json) {
     var legend = [];
     for (var i = 0; i < json["names"].length; i++) {
@@ -64,11 +78,11 @@ class Client extends Component {
                 <Card
                   title="Finance Ananlysis"
                   content={
-                    <ChartistGraph data={predictions.smallData} options={Object.assign({}, predictions.options, { stackBars: true })} type="Bar" />
+                    this.state._predictions ? <ChartistGraph data={this.state._predictions.data} options={Object.assign({}, this.state._predictions.options, { stackBars: true })} type="Bar" /> : null
                   }
                   legend={
                     <div className="legend-container">
-                      { ChartLegend([]) }
+                      { ChartLegend(this.state._predictions.legend) }
                     </div>
                   }
                 />

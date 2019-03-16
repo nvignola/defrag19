@@ -8,7 +8,7 @@ import fetch from 'util/fetch';
 import Card from "components/Card/Card.jsx";
 import transformDataForGraph from "variables/predictions";
 
-const API_URL = `${apiUrl}/statements`;
+export const API_URL = `${apiUrl}/statements`;
 
 const ChartLegend = (legend) => legend.map((prop, key) => {
     return <h5 key={key}>
