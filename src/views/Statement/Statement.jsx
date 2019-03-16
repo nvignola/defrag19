@@ -11,17 +11,17 @@ const tableValues = [];
 Object.keys(statement.data).forEach(k => {
     tableValues.push([
         statement.data[k].name,
-        statement.data[k].value1,
-        statement.data[k].value2,
-        statement.data[k].value3,
-        statement.data[k].value4,
+        `${statement.data[k].value1.toLocaleString()} €`,
+        `${statement.data[k].value2.toLocaleString()} €`,
+        `${statement.data[k].value3.toLocaleString()} €`,
+        `${statement.data[k].value4.toLocaleString()} €`,
     ]);
 });
 
 class Statement extends Component {
     render() {
         return (
-            <div className="content">
+            <div className="content statement-view">
                 <Grid fluid>
                     <Row>
                         <Col md={12}>
@@ -35,7 +35,7 @@ class Statement extends Component {
                                         <thead>
                                             <tr>
                                                 {tableHeader.map((prop, key) => {
-                                                    return <th key={key}>{prop}</th>;
+                                                    return <th key={key} className={key > 0 ? 'text-center' : ''}>{prop}</th>;
                                                 })}
                                             </tr>
                                         </thead>
@@ -44,7 +44,7 @@ class Statement extends Component {
                                                 return (
                                                     <tr key={key}>
                                                         {prop.map((prop, key) => {
-                                                            return <td key={key}>{prop}</td>;
+                                                            return <td className={key > 0 ? 'text-center' : ''} key={key}>{prop}</td>;
                                                         })}
                                                     </tr>
                                                 );
