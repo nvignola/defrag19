@@ -15,7 +15,7 @@ import Documents from './Documents';
 import Prediction from 'views/Prediction/Prediction';
 import Statement from "views/Statement/Statement";
 
-const ChartLegend = predictions.legend.map((prop, key) => {
+const ChartLegend = (legend) => legend.map((prop, key) => {
     return <h5 key={key} style={{ backgroundColor: `${prop.color}` }}>
         <span className="legend-label">{prop.label}</span>
     </h5>
@@ -36,7 +36,7 @@ class Client extends Component {
     const PROPS = this.props;
     return (
       <Fragment>
-        { 
+        {
         PROPS.location.pathname === PROPS.match.path
         ? <Grid fluid>
             <Row>
@@ -68,7 +68,7 @@ class Client extends Component {
                   }
                   legend={
                     <div className="legend-container">
-                      { ChartLegend }
+                      { ChartLegend(this.state._predictions.legend) }
                     </div>
                   }
                 />
@@ -76,9 +76,9 @@ class Client extends Component {
             </Row>
           </Grid>
         : <Fragment>
-          {this.props.location.pathname === `${this.props.match.url}/documents` ? <Route 
+          {this.props.location.pathname === `${this.props.match.url}/documents` ? <Route
             to={`${this.props.match.url}/documents`} exact={false}
-            render={() => <Documents client={this.props.client} />} 
+            render={() => <Documents client={this.props.client} />}
           /> : null}
           {this.props.location.pathname === `${this.props.match.url}/prediction` ? <Route
             to={`${this.props.match.url}/prediction`} exact={false}

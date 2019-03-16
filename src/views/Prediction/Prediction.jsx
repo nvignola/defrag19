@@ -4,9 +4,9 @@ import ChartistGraph from 'react-chartist';
 import { Link } from "react-router-dom";
 
 import Card from "components/Card/Card.jsx";
-import predictions from "variables/predictions";
+import transformDataForGraph from "variables/predictions";
 
-const ChartLegend = predictions.legend.map((prop, key) => {
+const ChartLegend = (legend) => legend.map((prop, key) => {
     return <h5 key={key}>
         <span className="legend-color" style={{ backgroundColor: `${prop.color}` }}></span>
         <span className="legend-label">{prop.label}</span>
@@ -14,6 +14,33 @@ const ChartLegend = predictions.legend.map((prop, key) => {
 });
 
 class Predictions extends Component {
+    constructor(props) {
+        super(props);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.state = {
+            _predictions: {
+                data: {},
+                options: {},
+                legend: [],
+            },
+            _apiUrl: 'https://i2m3v9oljk.execute-api.eu-west-1.amazonaws.com/production/statements',
+        };
+    }
+
+    componentDidMount() {
+        fetch(this.state._apiUrl, {
+            mode: "cors",
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+            },
+        })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(({ data }) => this.setState({
+            _predictions: transformDataForGraph(data),
+        }));
+    }
     render() {
         return (
             <div className="content prediction-view">
@@ -39,11 +66,11 @@ class Predictions extends Component {
                                 title="Prediction #1"
                                 category="Prediction"
                                 content={
-                                    <ChartistGraph data={predictions.data} options={Object.assign({}, predictions.options, { stackBars: true })} type="Bar" />
+                                    <ChartistGraph data={this.state._predictions.data} options={Object.assign({}, this.state._predictions.options, { stackBars: true })} type="Bar" />
                                 }
                                 legend={
                                     <div className="legend-container">
-                                        { ChartLegend }
+                                        { ChartLegend(this.state._predictions.legend) }
                                     </div>
                                 }
                             />
@@ -53,11 +80,11 @@ class Predictions extends Component {
                                 title="Prediction #2"
                                 category="Prediction"
                                 content={
-                                    <ChartistGraph data={predictions.data} options={predictions.options} type="Bar" />
+                                    <ChartistGraph data={this.state._predictions.data} options={this.state._predictions.options} type="Bar" />
                                 }
                                 legend={
                                     <div className="legend-container">
-                                        { ChartLegend }
+                                        { ChartLegend(this.state._predictions.legend) }
                                     </div>
                                 }
                             />
@@ -69,11 +96,11 @@ class Predictions extends Component {
                                 title="Prediction #3"
                                 category="Prediction"
                                 content={
-                                    <ChartistGraph data={predictions.data} options={predictions.options} type="Line" className="prediction-lines-animation" />
+                                    <ChartistGraph data={this.state._predictions.data} options={this.state._predictions.options} type="Line" className="prediction-lines-animation" />
                                 }
                                 legend={
                                     <div className="legend-container">
-                                        { ChartLegend }
+                                        { ChartLegend(this.state._predictions.legend) }
                                     </div>
                                 }
                             />
