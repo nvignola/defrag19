@@ -1,3 +1,5 @@
+import Tooltip from 'chartist-plugin-tooltip';
+console.log(Tooltip);
 const SERIES_COLORS = [
     '#1DC7EA',
     '#FB404B',
@@ -56,6 +58,9 @@ export default (statementsData) => {
                 },
                 scaleMinSpace: 15,
             },
+            plugins: [
+                Tooltip()
+            ],
         },
         legend,
     };
