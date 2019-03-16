@@ -5,7 +5,7 @@ const year2 = [];
 const year3 = [];
 const year4 = [];
 
-Object.keys(statement.data).forEach((k) => {
+Object.keys(statement.data).forEach(k => {
     year1.push(statement.data[k].value1);
     year2.push(statement.data[k].value2);
     year3.push(statement.data[k].value3);
