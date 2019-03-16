@@ -34,7 +34,7 @@ class Predictions extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={6}>
+                        <Col md={12}>
                             <Card
                                 title="Prediction #1"
                                 category="Prediction"
