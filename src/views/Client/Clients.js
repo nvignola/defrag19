@@ -1,8 +1,20 @@
 import React, { Component } from "react";
 import { Grid, Row, Col } from "react-bootstrap";
+import { Route, Switch, Link } from "react-router-dom";
+import Client from "views/Client/Client";
 
 import Card from "components/Card/Card";
 import clients from "variables/clients";
+
+
+const routes = clients.map(c => ({
+  path: `/clients/${c.id}`,
+  name: `Client: ${c.name}`,
+  icon: "pe-7s-graph",
+  component: Client,
+  data: c
+}))
+
 
 class Clients extends Component {
   render() {
@@ -30,7 +42,7 @@ class Clients extends Component {
                           key={key}
                         >
                           <div className="font-icon-detail">
-                            {client.name}
+                            <Link to={`/clients/${client.id}`}>{client.name}</Link>
                           </div>
                         </Col>
                       );
@@ -41,6 +53,17 @@ class Clients extends Component {
             </Col>
           </Row>
         </Grid>
+        {routes.map((prop, key) => <Route
+            path={prop.path}
+            key={key}
+            render={routeProps => (
+              <prop.component
+                {...routeProps}
+                client={prop.data}
+              />
+            )}
+          />
+        )}
       </div>
     );
   }

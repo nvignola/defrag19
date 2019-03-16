@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 
 import Card from "components/Card/Card.jsx";
-import { thArray, tdArray } from "variables/Variables.jsx";
+import { documentsTHArray, documentsTDArray } from "variables/Variables.jsx";
 class Documents extends Component {
   render() {
     return (
@@ -19,19 +19,23 @@ class Documents extends Component {
                   <Table striped hover>
                     <thead>
                       <tr>
-                        {thArray.map((prop, key) => {
+                        {documentsTHArray.map((prop, key) => {
                           return <th key={key}>{prop}</th>;
                         })}
                       </tr>
                     </thead>
                     <tbody>
-                      {tdArray.map((prop, key) => {
+                      {documentsTDArray.map((prop, key) => {
                         return (
                           <tr key={key}>
                             {prop.map((prop, key) => {
                               return <td key={key}>{prop}</td>;
                             })}
-                            <td key={'view'}><a href={'#/documentDetails'}>View Details</a></td>
+                            <td key={'view'}>
+                              <a className="btn btn-primary btn-sm" href={'#/documentDetails'}>View Details</a>
+                              &nbsp;
+                              <span className="btn btn-danger btn-sm">Delete</span>
+                            </td>
                           </tr>
                         );
                       })}
