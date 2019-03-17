@@ -6,7 +6,7 @@ import { apiUrl } from 'variables/config';
 import fetch from 'util/fetch';
 
 import Card from "components/Card/Card.jsx";
-import transformDataForGraph, { actualState, /* newState */ } from "variables/predictions";
+import transformDataForGraph, { actualState } from "variables/predictions";
 
 export const API_URL = `${apiUrl}/statements`;
 
@@ -41,7 +41,6 @@ class Predictions extends Component {
         fetch(API_URL)
             .then(({ data }) => this.setState({
                 _predictions: transformDataForGraph(data),
-                // _predictions: transformDataForGraph(newState.data),
             }))
             .then(() => this.setState({
                 _isLoading: false,

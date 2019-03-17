@@ -37,13 +37,10 @@ class Clients extends Component {
           </Row>
           <Row>
             <Col md={12}>
-              {this.state.view === 'grid' 
+              {this.state.view === 'grid'
               ? <Card
                 title="Clients"
                 ctAllIcons
-                category={
-                  <span>Clients</span>
-                }
                 content={
                   <Row>
                     {clients.map((client, key) => {
@@ -67,7 +64,7 @@ class Clients extends Component {
               />
               : null }
 
-              {this.state.view === 'table' 
+              {this.state.view === 'table'
               ? <Table striped hover>
                 <thead>
                   <tr>
