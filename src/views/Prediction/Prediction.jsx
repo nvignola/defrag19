@@ -21,6 +21,8 @@ class Predictions extends Component {
         super(props);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.state = {
+            _isLoading: false,
+            _hasBeenUpdated: false,
             _predictions: {
                 data: actualState.data,
                 options: actualState.options,
@@ -31,13 +33,25 @@ class Predictions extends Component {
     }
 
     handleClick() {
-        fetch(API_URL).then(({ data }) => this.setState({
-            _predictions: transformDataForGraph(data),
-        }));
+        if (this.state._hasBeenUpdated) {
+            return;
+        }
+
+        this.setState({ _isLoading: true });
+        fetch(API_URL)
+            .then(({ data }) => this.setState({
+                _predictions: transformDataForGraph(data),
+            }))
+            .then(() => this.setState({
+                _isLoading: false,
+                _hasBeenUpdated: true,
+            }))
     }
 
     componentDidMount() {}
     render() {
+        const { _isLoading, _hasBeenUpdated } = this.state;
+
         return (
             <div className="content prediction-view">
                 <Grid fluid>
@@ -58,7 +72,12 @@ class Predictions extends Component {
                         <Col md={4}>
                             {/* TODO fix style update btn */}
                             <p>
-                                <Button bsStyle="primary" onClick={this.handleClick}>Update</Button>
+                                <Button
+                                    bsStyle="primary"
+                                    disabled={_isLoading || _hasBeenUpdated}
+                                    onClick={!_isLoading ? this.handleClick : null}>
+                                    {_isLoading ? 'Loading…' : 'Update'}
+                                </Button>
                             </p>
                             <hr />
                         </Col>

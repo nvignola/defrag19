@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Row, Col, Table } from "react-bootstrap";
+import { Grid, Row, Col, Table, Button } from "react-bootstrap";
 
 import Card from "components/Card/Card.jsx";
 import { Link } from 'react-router-dom';
@@ -9,13 +9,30 @@ class Statement extends Component {
         super(props);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.state = {
-            _tableHeaders: [],
-            _tableValues: [],
+            _hasBeenUpdated: false,
+            _isLoading: false,
+            _tableHeaders: ['Name', '2016', '2017'],
+            _tableValues: [
+                ['Total Assets',
+                `${'19048'.toLocaleString()} €`,
+                `${'4032'.toLocaleString()} €`],
+                ['Other reserves',
+                `${'23483'.toLocaleString()} €`,
+                `${'14953'.toLocaleString()} €`],
+            ],
             _apiUrl: 'https://i2m3v9oljk.execute-api.eu-west-1.amazonaws.com/production/statements',
         };
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount() {}
+
+    handleClick() {
+        if (this.state._hasBeenUpdated) {
+            return;
+        }
+
+        this.setState({ _isLoading: true });
         fetch(this.state._apiUrl, {
             mode: "cors",
             headers: {
@@ -43,15 +60,19 @@ class Statement extends Component {
             this.setState({
                 _tableHeaders: tableHeaders,
                 _tableValues: tableValues,
+                _isLoading: false,
+                _hasBeenUpdated: true,
             })
         });
     }
     render() {
+        const { _isLoading, _hasBeenUpdated } = this.state;
+
         return (
             <div className="content statement-view">
                 <Grid fluid>
                     <Row>
-                        <Col md={12}>
+                        <Col md={8}>
                         <p>
                         <Link to={'/clients'}>Clients</Link>
                         <span className="breadcrumb-separator">&gt;</span>
@@ -63,6 +84,18 @@ class Statement extends Component {
                         <strong>Statement</strong>
                         </p>
                         <hr />
+                        </Col>
+                        <Col md={4}>
+                            {/* TODO fix style update btn */}
+                            <p>
+                                <Button
+                                    bsStyle="primary"
+                                    disabled={_isLoading || _hasBeenUpdated}
+                                    onClick={!_isLoading ? this.handleClick : null}>
+                                        {_isLoading ? 'Loading…' : 'Update'}
+                                </Button>
+                            </p>
+                            <hr />
                         </Col>
                     </Row>
                     <Row>
