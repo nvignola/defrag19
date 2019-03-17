@@ -1,19 +1,36 @@
 import React, { Component, Fragment } from "react";
 import { Link, Route } from "react-router-dom";
-import { Grid, Row, Col, Table } from "react-bootstrap";
-import gif from "assets/img/super_dino.gif";
+import { Grid, Row, Col, Table, Button } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 import Document from './Document';
+import fetch from 'util/fetch';
+import DOCUMENTS from 'variables/documents';
 
 const DOCUMENTS_URL = 'http://file-upload.eu-west-1.elasticbeanstalk.com/documents';
 
 class Documents extends Component {
-  state = { documents: [] };
+  state = { documents: DOCUMENTS, _hasBeenUpdated: false, _isLoading: false, };
 
   componentDidMount() {
-    fetch(DOCUMENTS_URL).then((documents) => this.setState({ documents }));
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    if (this.state._hasBeenUpdated) {
+      return;
+    }
+
+    this.setState({ _isLoading: true });
+    fetch(DOCUMENTS_URL)
+    .then(documents => {
+      this.setState({
+        documents: documents,
+        _isLoading: false,
+        _hasBeenUpdated: true,
+      });
+    });
   }
   render() {
+    const { _isLoading, _hasBeenUpdated } = this.state;
     return (
       <div className="content">
         <Grid fluid>
@@ -35,7 +52,19 @@ class Documents extends Component {
           <Row>
             <Col md={12}>
               <Card
-                title="Documents"
+                title={
+                  <div>
+                    Documents
+                    <Button
+                      className="pull-right update-btn"
+                      bsStyle="primary"
+                      disabled={_isLoading || _hasBeenUpdated}
+                      onClick={!_isLoading ? this.handleClick : null}>
+                      <i className="pe-7s-refresh-cloud"></i>&nbsp;
+                        {_isLoading ? 'Loading…' : 'Update'}
+                    </Button>
+                  </div>
+                  }
                 category="All the Documents uploaded for this Client"
                 ctTableFullWidth
                 ctTableResponsive
@@ -52,14 +81,14 @@ class Documents extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {this.state.documents.map((prop, key) => {
+                        {this.state.documents.map((doc, key) => {
                           return (
                             <tr key={key}>
-                              <td>{prop.id}</td>
-                              <td>{prop.name}</td>
-                              <td>{prop.uploadDate}</td>
+                              <td>{doc.id}</td>
+                              <td>{doc.name}</td>
+                              <td>{new Date(doc.upload_date).toLocaleString('de-DE')}</td>
                               <td>
-                                <Link className="btn btn-primary btn-sm" to={`${this.props.match.url}/${key}`}>View Details</Link>
+                                <Link className="btn btn-primary btn-sm" to={`${this.props.match.url}/${doc.id}`}>View Details</Link>
                                 &nbsp;
                                 <span className="btn btn-danger btn-sm">Delete</span>
                               </td>
@@ -69,7 +98,7 @@ class Documents extends Component {
                       </tbody>
                     </Table>
                     : <div className="text-centered">
-                        <img src={gif} alt="..." style={{ width: '100%', display: 'inline-block' }}/>
+                        Loading...
                     </div>
                   }
                   </Fragment>
@@ -81,7 +110,7 @@ class Documents extends Component {
         {(this.state.documents || []).map((doc) => <Route
           key={doc.id}
           path={`${this.props.match.url}/${doc.id}`}
-          render={(props) => <Document document={doc} {...props} />} 
+          render={(props) => <Document document={doc} {...props} />}
           />
         )}
       </div>

@@ -6,7 +6,7 @@ import { name, url } from "variables/config";
 
 import imagine from "assets/img/bg.jpg";
 import logo from "assets/img/dino.svg";
-import gif from "assets/img/super_dino.gif";
+// import gif from "assets/img/super_dino.gif";
 
 import dashboardRoutes from "routes/dashboard.jsx";
 

@@ -6,7 +6,7 @@ import { apiUrl } from 'variables/config';
 import fetch from 'util/fetch';
 
 import Card from "components/Card/Card.jsx";
-import transformDataForGraph, { actualState } from "variables/predictions";
+import transformDataForGraph, { actualState, /* newState */ } from "variables/predictions";
 
 export const API_URL = `${apiUrl}/statements`;
 
@@ -41,6 +41,7 @@ class Predictions extends Component {
         fetch(API_URL)
             .then(({ data }) => this.setState({
                 _predictions: transformDataForGraph(data),
+                // _predictions: transformDataForGraph(newState.data),
             }))
             .then(() => this.setState({
                 _isLoading: false,
@@ -56,31 +57,27 @@ class Predictions extends Component {
             <div className="content prediction-view">
                 <Grid fluid>
                     <Row>
-                        <Col md={8}>
+                      <Col md={12}>
                         <p>
+                        <Button
+                          className="pull-right update-btn"
+                          bsStyle="primary"
+                          disabled={_isLoading || _hasBeenUpdated}
+                          onClick={!_isLoading ? this.handleClick : null}>
+                                    <i className="pe-7s-refresh-cloud"></i>&nbsp;
+                            {_isLoading ? 'Loading…' : 'Update'}
+                        </Button>
                         <Link to={'/clients'}>Clients</Link>
                         <span className="breadcrumb-separator">&gt;</span>
                         <Link to={`/clients/${this.props.client.id}`}>
-                            {this.props.client.name}
-                            <span className="text-muted">(#{this.props.client.id})</span>
+                          {this.props.client.name}
+                          <span className="text-muted">(#{this.props.client.id})</span>
                         </Link>
                         <span className="breadcrumb-separator">&gt;</span>
                         <strong>Prediction</strong>
                         </p>
                         <hr />
-                        </Col>
-                        <Col md={4}>
-                            {/* TODO fix style update btn */}
-                            <p>
-                                <Button
-                                    bsStyle="primary"
-                                    disabled={_isLoading || _hasBeenUpdated}
-                                    onClick={!_isLoading ? this.handleClick : null}>
-                                    {_isLoading ? 'Loading…' : 'Update'}
-                                </Button>
-                            </p>
-                            <hr />
-                        </Col>
+                      </Col>
                     </Row>
                     <Row>
                         <Col md={12}>
@@ -112,6 +109,7 @@ class Predictions extends Component {
                             />
                         </Col>
                     </Row>
+                    { this.state._hasBeenUpdated ?
                     <Row>
                         <Col md={12}>
                             <Card
@@ -128,6 +126,7 @@ class Predictions extends Component {
                             />
                         </Col>
                     </Row>
+                    : null }
                 </Grid>
             </div>
         );

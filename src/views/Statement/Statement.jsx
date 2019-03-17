@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Row, Col, Table, Button } from "react-bootstrap";
-
+import fetch from 'util/fetch';
 import Card from "components/Card/Card.jsx";
 import { Link } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ class Statement extends Component {
                 `${'23483'.toLocaleString()} €`,
                 `${'14953'.toLocaleString()} €`],
             ],
-            _apiUrl: 'https://i2m3v9oljk.execute-api.eu-west-1.amazonaws.com/production/statements',
+            _apiUrl: 'http://file-upload.eu-west-1.elasticbeanstalk.com/statements',
         };
         this.handleClick = this.handleClick.bind(this);
     }
@@ -33,15 +33,7 @@ class Statement extends Component {
         }
 
         this.setState({ _isLoading: true });
-        fetch(this.state._apiUrl, {
-            mode: "cors",
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-            },
-        })
-        .then(function (response) {
-            return response.json();
-        })
+        fetch(this.state._apiUrl)
         .then(function(statements) {
             const tableHeaders = ['Name', '2016', '2017', '2018', '2019'];
             const tableValues = [];
@@ -72,31 +64,27 @@ class Statement extends Component {
             <div className="content statement-view">
                 <Grid fluid>
                     <Row>
-                        <Col md={8}>
+                      <Col md={12}>
                         <p>
+                        <Button
+                          className="pull-right update-btn"
+                          bsStyle="primary"
+                          disabled={_isLoading || _hasBeenUpdated}
+                          onClick={!_isLoading ? this.handleClick : null}>
+                          <i className="pe-7s-refresh-cloud"></i>&nbsp;
+                            {_isLoading ? 'Loading…' : 'Update'}
+                        </Button>
                         <Link to={'/clients'}>Clients</Link>
                         <span className="breadcrumb-separator">&gt;</span>
                         <Link to={`/clients/${this.props.client.id}`}>
-                            {this.props.client.name}
-                            <span className="text-muted">(#{this.props.client.id})</span>
+                          {this.props.client.name}
+                          <span className="text-muted">(#{this.props.client.id})</span>
                         </Link>
                         <span className="breadcrumb-separator">&gt;</span>
                         <strong>Statement</strong>
                         </p>
                         <hr />
-                        </Col>
-                        <Col md={4}>
-                            {/* TODO fix style update btn */}
-                            <p>
-                                <Button
-                                    bsStyle="primary"
-                                    disabled={_isLoading || _hasBeenUpdated}
-                                    onClick={!_isLoading ? this.handleClick : null}>
-                                        {_isLoading ? 'Loading…' : 'Update'}
-                                </Button>
-                            </p>
-                            <hr />
-                        </Col>
+                      </Col>
                     </Row>
                     <Row>
                         <Col md={12}>
@@ -110,7 +98,7 @@ class Statement extends Component {
                                         <thead>
                                             <tr>
                                                 {this.state._tableHeaders.map((prop, key) => {
-                                                    return <th key={key} className={key > 0 ? 'text-center' : ''}>{prop}</th>;
+                                                    return <th key={key} className={key > 0 ? `text-center y${prop}` : ''}>{prop}</th>;
                                                 })}
                                             </tr>
                                         </thead>
@@ -119,7 +107,7 @@ class Statement extends Component {
                                                 return (
                                                     <tr key={key}>
                                                         {prop.map((prop, key) => {
-                                                            return <td className={key > 0 ? 'text-center' : ''} key={key}>{prop}</td>;
+                                                            return <td className={key > 0 ? `text-center y${this.state._tableHeaders[key]}` : ''} key={key}>{prop}</td>;
                                                         })}
                                                     </tr>
                                                 );

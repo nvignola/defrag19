@@ -11,17 +11,17 @@
 /*
   STATEMENT
 */
-.statement-view tbody td:last-child,
-.statement-view thead th:last-child {
+.statement-view tbody td.y2019:last-child,
+.statement-view thead th.y2019:last-child {
   border-left: 2px solid coral;
   border-right: 2px solid coral;
 }
 
-.statement-view tbody tr:last-child td:last-child {
+.statement-view tbody tr:last-child td.y2019:last-child {
   border-bottom: 2px solid coral;
 }
 
-.statement-view thead th:last-child {
+.statement-view thead th.y2019:last-child {
   border-top: 2px solid coral !important;
   font-size: 1.5rem;
   font-weight: 700;
@@ -99,7 +99,7 @@
 
 .prediction-view .legend-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .prediction-view .legend-color {
@@ -165,3 +165,9 @@
 
 .ct-area, .ct-line {
   pointer-events: none; }
+
+.update-btn i {
+    font-size: 2rem;
+    vertical-align: top;
+    margin-right: 5px;
+}

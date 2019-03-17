@@ -6,23 +6,25 @@ import Card from "components/Card/Card.jsx";
 
 class Document extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className="content">
         <Grid fluid>
           <Row>
             <Col md={12}>
               <Card
-                title={`Document Details: #${this.props.document[0]}`}
+                title={
+                  <div>
+                    <span className="pull-right"><i className="pe-7s-clock" /> {new Date(this.props.document.upload_date).toLocaleString('de-DE')}</span>
+                    <strong>{this.props.document.name}</strong>
+                    &nbsp;
+                    <span className="text-muted">#{this.props.document.id}</span>
+                  </div>
+                }
                 category="Document Details with the OCR analysis and Information Extraction"
                 ctTableFullWidth
                 ctTableResponsive
                 content={
                   <div>
-                    <div className="content">
-                      <p><strong>Document Name:</strong> {this.props.document[1]}</p>
-                      <p><strong>Upload Date:</strong> {this.props.document[2]}</p>
-                    </div>
                     <Row className="content">
                       <Col md={4}>
                         <img style={{maxWidth: '100%'}} src={DocImage} alt="Document Received" />
