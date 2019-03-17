@@ -1,6 +1,7 @@
 import Dashboard from "views/Dashboard/Dashboard";
 import Typography from "views/Typography/Typography";
 import Clients from "views/Client/Clients";
+import Glossary from "views/Glossary";
 
 const dashboardRoutes = [
   {
@@ -19,7 +20,7 @@ const dashboardRoutes = [
     path: "/glossary",
     name: "Glossary",
     icon: "pe-7s-news-paper",
-    component: Typography
+    component: Glossary
   },
   { redirect: true, path: "/", to: "/dashboard", name: "Dashboard" }
 ];
