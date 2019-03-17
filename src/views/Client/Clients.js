@@ -41,6 +41,12 @@ class Clients extends Component {
               ? <Card
                 title="Clients"
                 ctAllIcons
+                category={
+                  <div>
+                  <span>All ongoing applications with Clients</span>
+                  <hr/>
+                  </div>
+                }
                 content={
                   <Row>
                     {clients.map((client, key) => {

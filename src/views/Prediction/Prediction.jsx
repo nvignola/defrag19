@@ -79,7 +79,7 @@ class Predictions extends Component {
                       </Col>
                     </Row>
                     <Row>
-                        <Col md={12}>
+                        <Col md={6}>
                             <Card
                                 title="Prediction #1"
                                 category="Prediction"
@@ -93,7 +93,7 @@ class Predictions extends Component {
                                 }
                             />
                         </Col>
-                        <Col md={12}>
+                        <Col md={6}>
                             <Card
                                 title="Prediction #2"
                                 category="Prediction"
