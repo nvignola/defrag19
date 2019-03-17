@@ -1,36 +1,59 @@
 import React, { Component, Fragment } from "react";
 import { Link, Route } from "react-router-dom";
-import { Grid, Row, Col, Table, Button } from "react-bootstrap";
+import { Grid, Row, Col, Table, Button, Modal } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 import Document from './Document';
 import fetch from 'util/fetch';
-import DOCUMENTS from 'variables/documents';
+import DocImage from "assets/img/doc.png";
+import ProcessedDocImage from "assets/img/doc.processed.png";
 
 const DOCUMENTS_URL = 'http://file-upload.eu-west-1.elasticbeanstalk.com/documents';
 
 class Documents extends Component {
-  state = { documents: DOCUMENTS, _hasBeenUpdated: false, _isLoading: false, };
-  constructor(props) {
-    super(props);
+  state = {
+    documents: [],
+    _isLoading: false,
+    show: false,
+  };
+
+  constructor(props, context) {
+    super(props, context);
+
     this.handleClick = this.handleClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ _isLoading: true });
+    fetch(DOCUMENTS_URL)
+      .then(documents => {
+        this.setState({
+          documents: documents,
+          _isLoading: false,
+        });
+      });
+  }
+
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow(index) {
+    this.setState({ show: index });
   }
   handleClick() {
-    if (this.state._hasBeenUpdated) {
-      return;
-    }
-
     this.setState({ _isLoading: true });
     fetch(DOCUMENTS_URL)
     .then(documents => {
       this.setState({
         documents: documents,
         _isLoading: false,
-        _hasBeenUpdated: true,
       });
     });
   }
   render() {
-    const { _isLoading, _hasBeenUpdated } = this.state;
+    const { _isLoading } = this.state;
     return (
       <div className="content">
         <Grid fluid>
@@ -58,7 +81,7 @@ class Documents extends Component {
                     <Button
                       className="pull-right update-btn"
                       bsStyle="primary"
-                      disabled={_isLoading || _hasBeenUpdated}
+                      disabled={_isLoading }
                       onClick={!_isLoading ? this.handleClick : null}>
                       <i className="pe-7s-refresh-cloud"></i>&nbsp;
                         {_isLoading ? 'Loading…' : 'Update'}
@@ -88,17 +111,47 @@ class Documents extends Component {
                               <td>{doc.name}</td>
                               <td>{new Date(doc.upload_date).toLocaleString('de-DE')}</td>
                               <td>
-                                <Link className="btn btn-primary btn-sm" to={`${this.props.match.url}/${doc.id}`}>View Details</Link>
+                                <Button bsStyle="primary" size="sm" onClick={this.handleShow.bind(this, key)} className="btn-fill">View Details</Button>
+                                {/* <Link className="btn btn-primary btn-sm" to={`${this.props.match.url}/${doc.id}`}>View Details</Link> */}
                                 &nbsp;
-                                <span className="btn btn-danger btn-sm">Delete</span>
+                                {/* <Button variant="primary" size="sm">Delete</Button> */}
+                                <Modal dialogClassName='modal-custom-width' show={this.state.show === key} onHide={this.handleClose}>
+                                  <Modal.Header closeButton>
+                                    <div>
+                                      <strong>{doc.name}</strong>
+                                      &nbsp;
+                                      <span className="text-muted">#{doc.id}</span>
+                                      <span><i className="pe-7s-clock" /> {new Date(doc.upload_date).toLocaleString('de-DE')}</span>
+                                    </div>
+                                  </Modal.Header>
+                                  <Modal.Body>
+                                    <Row className="content">
+                                      <Col md={4}>
+                                        <img style={{maxWidth: '100%'}} src={DocImage} alt="Document Received" />
+                                        <center>Document Received</center>
+                                      </Col>
+                                      <Col md={4}>
+                                        <img style={{maxWidth: '100%'}} src={DocImage} alt="Document Highlighted" />
+                                        <center>Document Highlighted</center>
+                                      </Col>
+                                      <Col md={4}>
+                                        <img style={{maxWidth: '100%'}} src={ProcessedDocImage} alt="Document Processed" />
+                                        <center>Document Processed</center>
+                                      </Col>
+                                    </Row>
+                                  </Modal.Body>
+                                  <Modal.Footer>
+                                    <Button variant="secondary" onClick={this.handleClose}>Close</Button>
+                                  </Modal.Footer>
+                                </Modal>
                               </td>
                             </tr>
                           );
                         })}
                       </tbody>
                     </Table>
-                    : <div className="text-centered">
-                        Loading...
+                    : <div className="text-center">
+                          <strong>Loading...</strong>
                     </div>
                   }
                   </Fragment>
@@ -107,12 +160,6 @@ class Documents extends Component {
             </Col>
           </Row>
         </Grid>
-        {(this.state.documents || []).map((doc) => <Route
-          key={doc.id}
-          path={`${this.props.match.url}/${doc.id}`}
-          render={(props) => <Document document={doc} {...props} />}
-          />
-        )}
       </div>
     );
   }

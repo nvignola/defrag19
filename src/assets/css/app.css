@@ -171,3 +171,7 @@
     vertical-align: top;
     margin-right: 5px;
 }
+
+.modal-custom-width {
+  width: 80%;
+}
