@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Grid, Row, Col, Table, Button, Modal } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
-import Document from './Document';
 import fetch from 'util/fetch';
 import DocImage from "assets/img/doc.png";
 import ProcessedDocImage from "assets/img/doc.processed.png";

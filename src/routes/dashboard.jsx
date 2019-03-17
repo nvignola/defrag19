@@ -1,5 +1,4 @@
 import Dashboard from "views/Dashboard/Dashboard";
-import Typography from "views/Typography/Typography";
 import Clients from "views/Client/Clients";
 import Glossary from "views/Glossary";
 

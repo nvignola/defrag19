@@ -11,14 +11,22 @@ class Statement extends Component {
         this.state = {
             _hasBeenUpdated: false,
             _isLoading: false,
-            _tableHeaders: ['Name', '2016', '2017'],
+            _tableHeaders: ['Name', '2016', '2017', '2018', '2019'],
             _tableValues: [
-                ['Total Assets',
-                `${'19048'.toLocaleString()} €`,
-                `${'4032'.toLocaleString()} €`],
-                ['Other reserves',
-                `${'23483'.toLocaleString()} €`,
-                `${'14953'.toLocaleString()} €`],
+                [
+                    'Total Assets',
+                    `${'19048'.toLocaleString()} €`,
+                    `${'4032'.toLocaleString()} €`,
+                    `-`,
+                    `-`
+                ],
+                [
+                    'Other reserves',
+                    `${'23483'.toLocaleString()} €`,
+                    `${'14953'.toLocaleString()} €`,
+                    `-`,
+                    `-`
+                ],
             ],
             _apiUrl: 'http://file-upload.eu-west-1.elasticbeanstalk.com/statements',
         };
