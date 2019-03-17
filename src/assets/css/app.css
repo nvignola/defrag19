@@ -123,7 +123,7 @@
 }
 .prediction-view-small .footer .legend-container{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .prediction-view-small .footer .legend-container h5{
   margin: 0;
