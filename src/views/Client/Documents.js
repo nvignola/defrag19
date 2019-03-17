@@ -10,8 +10,8 @@ const DOCUMENTS_URL = 'http://file-upload.eu-west-1.elasticbeanstalk.com/documen
 
 class Documents extends Component {
   state = { documents: DOCUMENTS, _hasBeenUpdated: false, _isLoading: false, };
-
-  componentDidMount() {
+  constructor(props) {
+    super(props);
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
