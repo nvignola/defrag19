@@ -1,5 +1,5 @@
 import Tooltip from 'chartist-plugin-tooltip';
-console.log(Tooltip);
+
 const SERIES_COLORS = [
     '#1DC7EA',
     '#FB404B',
@@ -17,6 +17,32 @@ const SERIES_COLORS = [
     '#6188e2',
     '#a748ca',
 ];
+
+const options = {
+    axisY: {
+        offset: 80,
+        labelInterpolationFnc: function (value) {
+            return value > 0 ? (value / 1000) + 'k/€' : value;
+        },
+        scaleMinSpace: 15,
+    },
+};
+
+export const actualState = {
+    legend: [
+        { label: 'Total assets', color: SERIES_COLORS[0], },
+        { label: 'Other reserves', color: SERIES_COLORS[1], },
+    ],
+    data: {
+        labels: ['2016', '2017'],
+        series: [
+            [ 19048, 23483 ],
+            [ 4032, 14953 ],
+        ],
+    },
+    options,
+}
+
 export default (statementsData) => {
     const legend = [];
     const year1 = [];
@@ -50,18 +76,7 @@ export default (statementsData) => {
             labels: ['2016', '2017', '2018'],
             series,
         },
-        options: {
-            axisY: {
-                offset: 80,
-                labelInterpolationFnc: function (value) {
-                    return value > 0 ? (value / 1000) + 'k/€' : value;
-                },
-                scaleMinSpace: 15,
-            },
-            plugins: [
-                Tooltip()
-            ],
-        },
+        options,
         legend,
     };
 };

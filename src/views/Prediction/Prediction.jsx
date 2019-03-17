@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col, Button } from "react-bootstrap";
 import ChartistGraph from 'react-chartist';
 import { Link } from "react-router-dom";
 import { apiUrl } from 'variables/config';
 import fetch from 'util/fetch';
 
 import Card from "components/Card/Card.jsx";
-import transformDataForGraph from "variables/predictions";
+import transformDataForGraph, { actualState } from "variables/predictions";
 
 export const API_URL = `${apiUrl}/statements`;
 
@@ -16,31 +16,33 @@ const ChartLegend = (legend) => legend.map((prop, key) => {
         <span className="legend-label">{prop.label}</span>
     </h5>
 });
-
 class Predictions extends Component {
     constructor(props) {
         super(props);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.state = {
             _predictions: {
-                data: {},
-                options: {},
-                legend: [],
+                data: actualState.data,
+                options: actualState.options,
+                legend: actualState.legend,
             },
         };
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    componentDidMount() {
+    handleClick() {
         fetch(API_URL).then(({ data }) => this.setState({
             _predictions: transformDataForGraph(data),
         }));
     }
+
+    componentDidMount() {}
     render() {
         return (
             <div className="content prediction-view">
                 <Grid fluid>
                     <Row>
-                        <Col md={12}>
+                        <Col md={8}>
                         <p>
                         <Link to={'/clients'}>Clients</Link>
                         <span className="breadcrumb-separator">&gt;</span>
@@ -52,6 +54,13 @@ class Predictions extends Component {
                         <strong>Prediction</strong>
                         </p>
                         <hr />
+                        </Col>
+                        <Col md={4}>
+                            {/* TODO fix style update btn */}
+                            <p>
+                                <Button bsStyle="primary" onClick={this.handleClick}>Update</Button>
+                            </p>
+                            <hr />
                         </Col>
                     </Row>
                     <Row>
