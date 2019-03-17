@@ -30,16 +30,12 @@ export const actualState = {
     legend: [
         { label: 'Total assets', color: SERIES_COLORS[0], },
         { label: 'Other reserves', color: SERIES_COLORS[1], },
-        { label: 'Retained earnings', color: SERIES_COLORS[2], },
-        { label: 'Operating liabilities', color: SERIES_COLORS[3], },
     ],
     data: {
-        labels: ['2016', '2017', '2018', '2019'],
+        labels: ['2016', '2017'],
         series: [
-            [ 356403, 192373, 0, 0 ],
-            [ 378445, 157362, 0, 0 ],
-            [ 301922, 149533, 0, 0 ],
-            [ 250382, 184953, 0, 0 ],
+            [356403, 192373 ],
+            [378445, 157362 ],
         ],
     },
     options,
