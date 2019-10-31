@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { HashRouter, Route, Switch } from "react-router-dom";
+//import { HashRouter, Route, Switch } from "react-router";
 
 import indexRoutes from "routes/index.jsx";
 
